@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: romo-valadez-kubernetes-service
+  labels:
+    app: romo-valadez-kubernetes-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: romovaladezkubernetes
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  sessionAffinity: None

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: romo-valadez-kubernetes-deployment
+  labels:
+    app: romovaladezkubernetes
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: romovaladezkubernetes
+  template:
+    metadata:
+      labels:
+        app: romovaladezkubernetes
+    spec:
+      containers:
+      - name: romovaladezkubernetes
+        image: jonhyble/romo_valadez_kubernetes:1.0
+        ports:
+        - containerPort: 8000

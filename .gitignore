@@ -1,0 +1,3 @@
+__pycache__/
+src/static/*
+!src/static/defecto.jpg
