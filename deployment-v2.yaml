@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: romo-valadez-istio-deployment
+  labels:
+    app: romovaladezistio
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: romovaladezistio
+  template:
+    metadata:
+      labels:
+        app: romovaladezistio
+    spec:
+      containers:
+      - name: romovaladezistio
+        image: jonhyble/romo_valadez_istio:1.0
+        ports:
+        - containerPort: 8000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: romo-valadez-istio-service
+  labels:
+    app: romo-valadez-istio-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: romovaladezistio
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  sessionAffinity: None
