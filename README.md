@@ -77,8 +77,8 @@ spec:
   servers:
   - port:
       number: 80
-      name: tcp
-      protocol: TCP
+      name: http
+      protocol: HTTP
     hosts:
     - "*"
 ~~~
@@ -95,15 +95,37 @@ spec:
   - apis-gateway
   http:
   - match:
-    - headers:
-        user-agent:
-          regex: .*Chrome.*
+    - uri:
+        prefix: /v1/
+    rewrite:
+        uri: /
     route:
     - destination:
         host: romo-valadez-kubernetes-service
-  - route:
+        port:
+          number: 8000
+  - match:
+    - uri:
+        prefix: /v2/
+    rewrite:
+        uri: /
+    route:
     - destination:
         host: romo-valadez-istio-service
+        port: 
+          number: 8000
+~~~
+
+También se creó un pequeño programa en python para poder hacer request a la aplicación y probarla.
+
+~~~python
+import requests
+import time
+
+while True:
+    response1 = requests.get('http://127.0.0.1/v1/')
+    response2 = requests.get('http://127.0.0.1/v2/')
+    time.sleep(1)
 ~~~
 
 Una vez descargado Istio y agregado al path, se puede instalar.
@@ -134,9 +156,25 @@ Se podrán comprobar los pods corriendo.
 
 ![Pods](./Imagenes/7.png "Pods")
 
-También se podrá ver la gráfica de las aplicaciones en kiali.
+Se deberán de instalar varias cosas para que kiali pueda mostrar gráficos.
 
-![Gráfica](./Imagenes/8.png "Gráfica")
+![Instalación para kiali](./Imagenes/8.png "Instalación para kiali")
+
+Ahora se podrán ver los gráficos en kiali
+
+![Gráfico sin uso](./Imagenes/9.png "Gráfico sin uso")
+
+Se puede comprobar el uso de la aplicación, en este caso la versión 2, que se puede acceder con el prefijo v2, a la cual se puede acceder a datos con una ruta sin nada más que la versión.
+
+![Datos V2](./Imagenes/10.png "Datos V2")
+
+También se puede comprobar que en la versión 1, accedida por medio del prefijo v1, no existe esta ruta para acceder a todos los datos.
+
+![Datos V1](./Imagenes/11.png "Datos V1")
+
+Ahora se utilizará el programa en python para crear solicitudes, y así poder ver cómo se ve el gráfico.
+
+![Gráfico en uso](./Imagenes/12.png "Gráfico en uso")
 
 ---
 
