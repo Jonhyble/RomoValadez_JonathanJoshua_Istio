@@ -9,12 +9,22 @@ spec:
   - apis-gateway
   http:
   - match:
-    - headers:
-        user-agent:
-          regex: .*Chrome.*
+    - uri:
+        prefix: /v1/
+    rewrite:
+        uri: /
     route:
     - destination:
         host: romo-valadez-kubernetes-service
-  - route:
+        port:
+          number: 8000
+  - match:
+    - uri:
+        prefix: /v2/
+    rewrite:
+        uri: /
+    route:
     - destination:
         host: romo-valadez-istio-service
+        port: 
+          number: 8000

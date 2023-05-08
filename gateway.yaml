@@ -8,7 +8,7 @@ spec:
   servers:
   - port:
       number: 80
-      name: tcp
-      protocol: TCP
+      name: http
+      protocol: HTTP
     hosts:
     - "*"

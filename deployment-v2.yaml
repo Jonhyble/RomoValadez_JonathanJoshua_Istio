@@ -29,7 +29,6 @@ metadata:
   labels:
     app: romo-valadez-istio-service
 spec:
-  type: LoadBalancer
   selector:
     app: romovaladezistio
   ports:

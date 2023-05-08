@@ -29,7 +29,6 @@ metadata:
   labels:
     app: romo-valadez-kubernetes-service
 spec:
-  type: LoadBalancer
   selector:
     app: romovaladezkubernetes
   ports:
