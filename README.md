@@ -172,7 +172,7 @@ También se puede comprobar que en la versión 1, accedida por medio del prefijo
 
 ![Datos V1](./Imagenes/11.png "Datos V1")
 
-Ahora se utilizará el programa en python para crear solicitudes, y así poder ver cómo se ve el gráfico.
+Ahora se utilizará el programa en python para crear solicitudes, y así poder ver el gráfico cuando las aplicaciones reciben solicitudes.
 
 ![Gráfico en uso](./Imagenes/12.png "Gráfico en uso")
 
